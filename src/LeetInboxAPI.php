@@ -22,12 +22,14 @@ class LeetInboxAPI {
     const CONFIG_NPMESSAGE = "newPlayerMessage";
 
     public static function getMessageCount($player) {
+        $player = $conn->real_escape_string($player);
         $sql = "SELECT * FROM $messagesTable WHERE recipient=$player AND read=0";
         $result = $conn->query($sql);
         return $result->num_rows;
     }
 
     public static function getMessages($player) {
+        $player = $conn->real_escape_string($player);
         $sql = "SELECT * FROM $messagesTable WHERE recipient=$player";
         $result = $conn->query($sql);
         $array = array();
@@ -47,6 +49,9 @@ class LeetInboxAPI {
 
     public static function addMessage($player, $sender, $message) {
         $time = time()
+        $player = $conn->real_escape_string($player);
+        $sender = $conn->real_escape_string($sender);
+        $message = $conn->real_escape_string($message);
         $sql = "INSERT INTO $messagesTable (time_sent, sender, recipient, message, read) VALUES ('$time', '$sender', '$player', '$message', 0)";
         if($conn->query($sql) === TRUE) {
             return true;
@@ -57,6 +62,7 @@ class LeetInboxAPI {
     }
 
     public static function clearMessages($player) {
+        $player = $conn->real_escape_string($player);
         $sql = "DELETE FROM $messagesTable WHERE recipient=$player";
         if($conn->query($sql) === TRUE) {
             return true;
