@@ -1,0 +1,21 @@
+name: LeetInbox
+main: leetinbox\LeetInbox
+version: 1.0.0
+api: [1.0.0]
+
+load: POSTWORLD
+author: Corey
+description: Messaging/Inbox system for LEET server
+website: http://leet.cc
+commands:
+ mail:
+  description: "Send a message to another player"
+  usage: "/mail < read | clear | send | sendall >"
+  permission: leetinbox.leetinbox.command.mail
+permissions:
+ leetinbox.leetinbox.command.mail:
+  description: "Allows users to use the mail command"
+  default: true
+ leetinbox.leetinbox.command.mail.all:
+  description: "Allows the user to send a message to all players"
+  default: op
