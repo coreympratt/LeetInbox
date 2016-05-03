@@ -13,7 +13,7 @@ class LeetInboxAPI {
     public const $messagesTable = 'messages';
 
     //Create connection to the database
-    $conn = new mysqli($server, $username, $password);
+    $conn = @new \mysqli($server, $username, $password);
 
     private static $isSetup = false;
     private static $config = false;
