@@ -13,7 +13,7 @@ use pocketmine\plugin\PluginBase;
 class LeetInbox extends PluginBase implements Listener {
 
     const CONFIG_MAXMESSAGE = 10;
-    const CONFIG_SIMILARLIM = 0; //Adjustments may be made
+    const CONFIG_SIMILARLIM = 0.45; //Adjustments may be made
     //const CONFIG_NOTIFY = "notifyOnNew"; To be done
 
     
@@ -28,11 +28,6 @@ class LeetInbox extends PluginBase implements Listener {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
         $this->saveDefaultConfig();
         $this->reloadConfig();
-
-
-        $this->saveResource("messages.yml", false);
-        $messages = (new Config($this->getDataFolder() . "messages.yml"))->getAll();
-        $this->messages = $this->parseMessages($messages);
 
         $mailCommand = $this->getCommand("mail");
         $mailCommand->setAliases(array($this->getMessage("commands.names.mail")));
